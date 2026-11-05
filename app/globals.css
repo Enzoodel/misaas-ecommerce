@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: 176 107 255;
+  color-scheme: dark;
+}
+[data-accent='blue']   { --accent: 77 159 255; }
+[data-accent='purple'] { --accent: 176 107 255; }
+[data-accent='green']  { --accent: 52 245 164; }
+
+@layer base {
+  html { @apply bg-neutral-950 text-neutral-100 antialiased; }
+  body {
+    @apply min-h-dvh font-sans;
+    background-image:
+      radial-gradient(60rem 40rem at 80% -10%, rgb(var(--accent) / 0.14), transparent 60%),
+      radial-gradient(40rem 30rem at -10% 110%, rgb(var(--accent) / 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection { background: rgb(var(--accent) / 0.35); }
+  :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 2px; }
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 20px 50px -20px rgb(0 0 0 / 0.6);
+  }
+  .btn-neon {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold text-neutral-950 transition;
+    background: rgb(var(--accent));
+    box-shadow: 0 0 0 1px rgb(var(--accent) / 0.6), 0 8px 30px -8px rgb(var(--accent) / 0.7);
+  }
+  .btn-neon:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px rgb(var(--accent)), 0 10px 40px -6px rgb(var(--accent) / 0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
